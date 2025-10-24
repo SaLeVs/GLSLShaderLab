@@ -18,12 +18,9 @@ float ambient = 0.2;
 
 void main()
 {
-    // Amostra o normal do normal map (em espaço de textura)
     vec3 normalMap = texture(texture2, TexCoord).rgb;
-    // Converte de [0,1] para [-1,1]
     normalMap = normalize(normalMap * 2.0 - 1.0);
 
-    // Mistura o normal original com o normal do normal map
     vec3 finalNormal = normalize(mix(Normal, normalMap, 0.7));
 
     float brightness = clamp(dot(finalNormal, -lightDir), 0.0, 1.0);
@@ -32,7 +29,4 @@ void main()
     vec4 texColor1 = texture(texture0, TexCoord);
 
     FragColor = texColor * (brightness + ambient);
-    
-   
-    
 }
